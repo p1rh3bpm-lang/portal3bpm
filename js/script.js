@@ -155,38 +155,6 @@ const ROTINA_GRID = {
   ]
 };
 
-<hr style="border:0;border-top:1px dashed var(--ring);margin:18px 0;">
-<h2 style="margin:0 0 6px 0;font-size:18px;">Distribuição de RP por Turno</h2>
-<div class="muted" style="margin-bottom:8px">Consulta por turno e por cidade.</div>
-
-<div class="toolbar">
-  <label class="muted">Turno:</label>
-  <select id="turnoSel" class="input">
-    <option value="ALFA">ALFA</option>
-    <option value="BRAVO">BRAVO</option>
-    <option value="CHARLIE">CHARLIE</option>
-    <option value="DELTA">DELTA</option>
-  </select>
-
-  <label class="muted">Cidade:</label>
-  <input id="buscaCidade" class="input" placeholder="Ex.: Arapiraca, Craíbas..." style="max-width:260px">
-
-  <button id="btnLimparFiltro" class="btn">Limpar</button>
-</div>
-
-<div class="table-wrap">
-  <table class="rotina" id="tabelaDistrib">
-    <thead>
-      <tr>
-        <th style="width:260px">Cidade</th>
-        <th>RPs atribuídas no turno</th>
-      </tr>
-    </thead>
-    <tbody><!-- preenchido via JS --></tbody>
-  </table>
-</div>
-
-
 // =================== Utilidades ===================
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
