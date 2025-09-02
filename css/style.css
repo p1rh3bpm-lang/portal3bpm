@@ -73,3 +73,6 @@ tr.now td{outline:2px solid var(--accent); outline-offset:-2px}
 .badge-HERMES{background:rgba(59,130,246,.12)}
 .toolbar{display:flex; gap:8px; align-items:center; margin:10px 0}
 .toolbar .btn{width:auto}
+
+.rp-badge{display:inline-block; padding:2px 8px; margin:2px 4px 0 0; border-radius:10px; border:1px solid var(--ring); font-size:12px}
+
