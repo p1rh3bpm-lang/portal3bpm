@@ -488,43 +488,40 @@ function renderDistribuicaoRP() {
 
   // ======= INÍCIO: complemento para Rotina RP + Distribuição RP no painel Gestor =======
   // Guardamos a referência da switchTab original
-  const _oldSwitchTab = switchTab;
+ const _oldSwitchTab = switchTab;
+switchTab = function(tab) {
+  _oldSwitchTab(tab);
 
-  // Monkey-patch para acrescentar a renderização extra quando for aba "gestor"
-  switchTab = function(tab) {
-    // mantém comportamento padrão
-    _oldSwitchTab(tab);
+  if (tab === "gestor") {
+    // 1) Distribuição primeiro
+    if (typeof renderDistribuicaoRP === "function") renderDistribuicaoRP();
 
-    if (tab === "gestor") {
-      // Rotina RP (dentro do painel gestor)
-      if (typeof renderRotinaIntoGestor === "function") renderRotinaIntoGestor();
+    // 2) Rotina depois
+    if (typeof renderRotinaIntoGestor === "function") renderRotinaIntoGestor();
 
-      // Distribuição RP por turno
-      if (typeof renderDistribuicaoRP === "function") renderDistribuicaoRP();
+    // listeners (iguais ao que já está):
+    const turnoSel = document.querySelector("#turnoSel");
+    const buscaCidade = document.querySelector("#buscaCidade");
+    const btnLimpar = document.querySelector("#btnLimparFiltro");
 
-      // Ligar listeners dos filtros de distribuição (uma única vez por sessão)
-      const turnoSel = document.querySelector("#turnoSel");
-      const buscaCidade = document.querySelector("#buscaCidade");
-      const btnLimpar = document.querySelector("#btnLimparFiltro");
-
-      if (turnoSel && !turnoSel._wired) {
-        turnoSel.addEventListener("change", renderDistribuicaoRP);
-        turnoSel._wired = true;
-      }
-      if (buscaCidade && !buscaCidade._wired) {
-        buscaCidade.addEventListener("input", renderDistribuicaoRP);
-        buscaCidade._wired = true;
-      }
-      if (btnLimpar && !btnLimpar._wired) {
-        btnLimpar.addEventListener("click", () => {
-          if (turnoSel) turnoSel.value = "ALFA";
-          if (buscaCidade) buscaCidade.value = "";
-          renderDistribuicaoRP();
-        });
-        btnLimpar._wired = true;
-      }
+    if (turnoSel && !turnoSel._wired) {
+      turnoSel.addEventListener("change", renderDistribuicaoRP);
+      turnoSel._wired = true;
     }
-  };
+    if (buscaCidade && !buscaCidade._wired) {
+      buscaCidade.addEventListener("input", renderDistribuicaoRP);
+      buscaCidade._wired = true;
+    }
+    if (btnLimpar && !btnLimpar._wired) {
+      btnLimpar.addEventListener("click", () => {
+        if (turnoSel) turnoSel.value = "ALFA";
+        if (buscaCidade) buscaCidade.value = "";
+        renderDistribuicaoRP();
+      });
+      btnLimpar._wired = true;
+    }
+  }
+};
   // ======= FIM: complemento para Rotina RP + Distribuição RP no painel Gestor =======
 
   // Navegação direta via hash
