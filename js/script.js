@@ -68,6 +68,48 @@ const RESTRITOS = [
   { title: "Relatório Pós-Ação", url: "https://exemplo.gov/gestor/pos-acao", desc: "Dados operacionais.", tags: ["relatório"], status: "Encerrada" }
 ];
 
+// Mapa de Distribuição das Radiopatrulhas (Set/2025)
+// Fonte: "Mapa de Distribuição – Setembro/2025" (arquivo enviado)
+const DISTRIBUICAO_RP = {
+  "ARAPIRACA": {
+    "ALFA":    [4, 7, 8, 9],
+    "BRAVO":   [3, 4, 8, 9],
+    "CHARLIE": [3, 5, 7, 8],
+    "DELTA":   [1, 3, 8, 9]
+  },
+  "COITÉ DO NOIA": {
+    "ALFA":    [6],
+    "BRAVO":   [1],
+    "CHARLIE": [1],
+    "DELTA":   [5]
+  },
+  "CRAÍBAS": {
+    "ALFA":    [1],
+    "BRAVO":   [6],
+    "CHARLIE": [6],
+    "DELTA":   [7]
+  },
+  "FEIRA GRANDE": {
+    "ALFA":    [2],
+    "BRAVO":   [7],
+    "CHARLIE": [4],
+    "DELTA":   [2]
+  },
+  "LIMOEIRO DE ANADIA": {
+    "ALFA":    [3],
+    "BRAVO":   [2],
+    "CHARLIE": [9],
+    "DELTA":   [4]
+  },
+  "TAQUARANA": {
+    "ALFA":    [5],
+    "BRAVO":   [5],
+    "CHARLIE": [2],
+    "DELTA":   [6]
+  }
+};
+
+
 // Rotina RP em grade comparativa: Hora | ARAPIRACA | Demais Cidades
 const ROTINA_GRID = {
   "Seg–Qui": [
@@ -433,28 +475,98 @@ function renderRotinaIntoGestor() {
   document.querySelector("#btnPrint")?.addEventListener("click", () => window.print());
 }
 
+function renderDistribuicaoRP() {
+  const turno = (document.querySelector("#turnoSel")?.value || "ALFA").toUpperCase();
+  const filtro = (document.querySelector("#buscaCidade")?.value || "").trim().toLowerCase();
+
+  const tbody = document.querySelector("#tabelaDistrib tbody");
+  if (!tbody) return;
+
+  // ordena cidades por nome
+  const cidades = Object.keys(DISTRIBUICAO_RP).sort((a,b) => a.localeCompare(b));
+
+  const linhas = cidades
+    .filter(c => !filtro || c.toLowerCase().includes(filtro))
+    .map(cidade => {
+      const rps = (DISTRIBUICAO_RP[cidade] && DISTRIBUICAO_RP[cidade][turno]) || [];
+      const htmlRps = rps.length
+        ? rps.map(n => `<span class="rp-badge">RP ${String(n).padStart(2,'0')}</span>`).join(" ")
+        : `<span class="muted">—</span>`;
+      return `<tr><td><b>${cidade}</b></td><td>${htmlRps}</td></tr>`;
+    })
+    .join("");
+
+  tbody.innerHTML = linhas || `<tr><td colspan="2" class="muted">Nada encontrado para esse filtro.</td></tr>`;
+}
 
 
+// =================== Inicialização ===================
 // =================== Inicialização ===================
 (function init(){
   renderVersion();
 
+  // Abas
   $("#tab-op").addEventListener("click", ()=> switchTab("op"));
   $("#tab-gestor").addEventListener("click", ()=> ensureGestor());
 
+  // Filtros comuns (Operações/Gestor)
   $("#q").addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
   $("#statusSel").addEventListener("change", e=>{ state.status = e.target.value; renderGrid(); });
 
+  // PIN Gestor
   $("#pinBtn").addEventListener("click", checkPin);
   $("#pin").addEventListener("keydown", e=>{ if(e.key==="Enter") checkPin(); });
 
   // Restaurar desbloqueio do gestor
   if(localStorage.getItem("bpmPortalGestorOK") === "1"){ state.gestorOK = true; }
 
-  // Navegação direta para gestor via hash: #gestor (se já desbloqueado)
-  if(location.hash.replace('#','') === 'gestor'){
+  // ======= INÍCIO: complemento para Rotina RP + Distribuição RP no painel Gestor =======
+  // Guardamos a referência da switchTab original
+  const _oldSwitchTab = switchTab;
+
+  // Monkey-patch para acrescentar a renderização extra quando for aba "gestor"
+  switchTab = function(tab) {
+    // mantém comportamento padrão
+    _oldSwitchTab(tab);
+
+    if (tab === "gestor") {
+      // Rotina RP (dentro do painel gestor)
+      if (typeof renderRotinaIntoGestor === "function") renderRotinaIntoGestor();
+
+      // Distribuição RP por turno
+      if (typeof renderDistribuicaoRP === "function") renderDistribuicaoRP();
+
+      // Ligar listeners dos filtros de distribuição (uma única vez por sessão)
+      const turnoSel = document.querySelector("#turnoSel");
+      const buscaCidade = document.querySelector("#buscaCidade");
+      const btnLimpar = document.querySelector("#btnLimparFiltro");
+
+      if (turnoSel && !turnoSel._wired) {
+        turnoSel.addEventListener("change", renderDistribuicaoRP);
+        turnoSel._wired = true;
+      }
+      if (buscaCidade && !buscaCidade._wired) {
+        buscaCidade.addEventListener("input", renderDistribuicaoRP);
+        buscaCidade._wired = true;
+      }
+      if (btnLimpar && !btnLimpar._wired) {
+        btnLimpar.addEventListener("click", () => {
+          if (turnoSel) turnoSel.value = "ALFA";
+          if (buscaCidade) buscaCidade.value = "";
+          renderDistribuicaoRP();
+        });
+        btnLimpar._wired = true;
+      }
+    }
+  };
+  // ======= FIM: complemento para Rotina RP + Distribuição RP no painel Gestor =======
+
+  // Navegação direta via hash
+  const hash = location.hash.replace('#','');
+  if (hash === 'gestor') {
     if(state.gestorOK) switchTab('gestor'); else ensureGestor();
   } else {
     switchTab('op');
   }
 })();
+
