@@ -4,9 +4,60 @@ const ADMIN_PIN = "1234"; // <<< Altere o PIN aqui
 // Operações (público)
 // Campos: title, url, desc, tags, status (Vigente|Planejada|Encerrada), periodo, responsavel
 const OPERACOES = [
-  { title: "OP VIGILÂNCIA CENTRO", url: "https://exemplo.gov/operacao1", desc: "Patrulhamento reforçado em área comercial.", tags: ["urbano","centro"], status: "Vigente", periodo: "01–15/09/2025", responsavel: "Cap. Silva" },
-  { title: "OP RODOVIAS LESTE", url: "https://exemplo.gov/operacao2", desc: "Bloqueios e abordagens em eixos viários.", tags: ["rodovia"], status: "Planejada", periodo: "20–28/09/2025", responsavel: "Ten. Souza" },
-  { title: "OP FEIRA SEGURA", url: "https://exemplo.gov/operacao3", desc: "Pontos-base em horários de pico.", tags: ["urbano","feira"], status: "Encerrada", periodo: "10–18/08/2025", responsavel: "Sgt. Lima" }
+  {
+    title: "OPO 01 – ICARUS: Garantindo a Ordem",
+    url: "#",
+    desc: "Fiscalização ostensiva com blitzes estratégicas e lavratura de TCOs para prevenir acidentes, reduzir riscos e fortalecer a sensação de segurança.",
+    tags: ["urbano","arapiraca"],
+    status: "Vigente",
+    periodo: "Seg–Qui: 08h15–09h30 | Sex–Dom: 07h45–09h00",
+    responsavel: "Todas as RP e FT em Arapiraca"
+  },
+  {
+    title: "OPO 02 – FAUNO: Sentinela das Trilhas",
+    url: "#",
+    desc: "Reforço policial e fiscalização de trânsito em zonas rurais de Arapiraca e demais cidades, prevenindo acidentes e garantindo mobilidade segura.",
+    tags: ["rural","trânsito"],
+    status: "Vigente",
+    periodo: "Seg–Qui: 08h15–09h00 | Sex–Dom: 07h45–08h30",
+    responsavel: "Todas as guarnições exceto Arapiraca"
+  },
+  {
+    title: "OPO 03 – ÓRION: Batalhão Vigilante",
+    url: "#",
+    desc: "Integra ações preventivas, repressivas e de inteligência para reduzir crimes violentos, receptação e infrações viárias.",
+    tags: ["urbano","rodovia"],
+    status: "Vigente",
+    periodo: "Seg–Qui: manhã 09h30–11h30 | tarde 15h30–17h00 | noite 20h00–21h30 | madrugada 23h00–01h00 | Sex–Dom: horários equivalentes",
+    responsavel: "Todas as RP e FT do 3º BPM"
+  },
+  {
+    title: "OPO 04 – CERBERUS: Sentinela Escolar",
+    url: "#",
+    desc: "Proteção da comunidade escolar com ações preventivas contra transporte irregular, drogas, álcool e crimes nas imediações das escolas.",
+    tags: ["escolar","prevenção"],
+    status: "Vigente",
+    periodo: "Seg–Qui: manhã 11h30–12h30 | tarde 17h00–19h00 | noite 21h30–23h00",
+    responsavel: "Todas as guarnições exceto Arapiraca"
+  },
+  {
+    title: "OPO 05 – AURORA: Garantindo a Ordem",
+    url: "#",
+    desc: "Fiscalização ostensiva para coibir infrações de trânsito e condutas que coloquem terceiros em risco, com blitzes e abordagens educativas.",
+    tags: ["arapiraca","trânsito"],
+    status: "Vigente",
+    periodo: "Seg–Qui: 05h00–06h30 | Sex–Dom: 05h30–06h30",
+    responsavel: "Todas as RP e FT em Arapiraca"
+  },
+  {
+    title: "OPO 06 – HERMES: Repressão ao Tráfico em Trânsito",
+    url: "#",
+    desc: "Foco em repressão ao tráfico durante deslocamentos, com patrulhamentos em horários de maior risco.",
+    tags: ["rodovia","tráfico"],
+    status: "Vigente",
+    periodo: "Sex–Dom: manhã 10h30–12h00 | tarde 18h00–19h30 | noite 22h30–00h00",
+    responsavel: "Todas as guarnições exceto Arapiraca"
+  }
 ];
 
 // Área do Gestor (restrita)
