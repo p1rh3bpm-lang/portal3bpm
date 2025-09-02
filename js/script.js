@@ -499,8 +499,6 @@ function renderDistribuicaoRP() {
   tbody.innerHTML = linhas || `<tr><td colspan="2" class="muted">Nada encontrado para esse filtro.</td></tr>`;
 }
 
-
-// =================== Inicialização ===================
 // =================== Inicialização ===================
 (function init(){
   renderVersion();
@@ -569,4 +567,3 @@ function renderDistribuicaoRP() {
     switchTab('op');
   }
 })();
-
