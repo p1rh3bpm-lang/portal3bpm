@@ -68,6 +68,52 @@ const RESTRITOS = [
   { title: "Relatório Pós-Ação", url: "https://exemplo.gov/gestor/pos-acao", desc: "Dados operacionais.", tags: ["relatório"], status: "Encerrada" }
 ];
 
+// Rotina RP em grade comparativa: Hora | ARAPIRACA | Demais Cidades
+const ROTINA_GRID = {
+  "Seg–Qui": [
+    { hora: "07:00–07:25", arapiraca: "Cautela de armamentos, equipamentos e veículos", demais: "Cautela de armamentos, equipamentos e veículos" },
+    { hora: "07:25–07:30", arapiraca: "Formatura matinal", demais: "Formatura matinal" },
+    { hora: "07:30–07:45", arapiraca: "Preleção – Oficial de Operações", demais: "Preleção – Oficial de Operações" },
+    { hora: "07:45–08:15", arapiraca: "Instrução Geral Básica", demais: "Instrução Geral Básica" },
+    { hora: "08:15–09:00", arapiraca: "OPO 01 – ICARUS", demais: "OPO 02 – FAUNO" },
+    { hora: "09:00–09:30", arapiraca: "Deslocamento da tropa", demais: "Deslocamento da tropa" },
+    { hora: "09:30–11:30", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "11:30–12:30", arapiraca: "OPO 04 – CERBERUS", demais: "OPO 04 – CERBERUS" },
+    { hora: "12:30–15:30", arapiraca: "Almoço / Prontidão", demais: "Almoço / Prontidão" },
+    { hora: "15:30–17:00", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "17:00–19:00", arapiraca: "OPO 04 – CERBERUS", demais: "OPO 04 – CERBERUS" },
+    { hora: "19:00–20:00", arapiraca: "Jantar / Prontidão", demais: "Jantar / Prontidão" },
+    { hora: "20:00–21:30", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "21:30–23:00", arapiraca: "OPO 04 – CERBERUS", demais: "OPO 04 – CERBERUS" },
+    { hora: "23:00–01:00", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "01:00–05:00", arapiraca: "Prontidão", demais: "Prontidão" },
+    { hora: "05:00–06:00", arapiraca: "OPO 05 – AURORA", demais: "OPO 02 – FAUNO" },
+    { hora: "06:00–06:30", arapiraca: "Recolhimento à Sede do 3º BPM", demais: "Recolhimento à Sede do 3º BPM" },
+    { hora: "06:30–07:00", arapiraca: "Desarme de armamentos, equipamentos e veículos", demais: "Desarme de armamentos, equipamentos e veículos" }
+  ],
+  "Sex–Dom": [
+    { hora: "07:00–07:25", arapiraca: "Cautela de armamentos, equipamentos e veículos", demais: "Cautela de armamentos, equipamentos e veículos" },
+    { hora: "07:25–07:30", arapiraca: "Formatura matinal", demais: "Formatura matinal" },
+    { hora: "07:30–07:45", arapiraca: "Preleção – Oficial de Operações", demais: "Preleção – Oficial de Operações" },
+    { hora: "07:45–08:30", arapiraca: "OPO 01 – ICARUS", demais: "OPO 02 – FAUNO" },
+    { hora: "08:30–09:00", arapiraca: "Deslocamento da tropa", demais: "Deslocamento da tropa" },
+    { hora: "09:00–10:30", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "10:30–12:00", arapiraca: "OPO 06 – HERMES", demais: "OPO 06 – HERMES" },
+    { hora: "12:00–16:00", arapiraca: "Almoço / Prontidão", demais: "Almoço / Prontidão" },
+    { hora: "16:00–18:00", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "18:00–19:30", arapiraca: "OPO 06 – HERMES", demais: "OPO 06 – HERMES" },
+    { hora: "19:30–21:00", arapiraca: "Jantar / Prontidão", demais: "Jantar / Prontidão" },
+    { hora: "21:00–22:30", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "22:30–00:00", arapiraca: "OPO 06 – HERMES", demais: "OPO 06 – HERMES" },
+    { hora: "00:00–02:00", arapiraca: "OPO 03 – ÓRION", demais: "OPO 03 – ÓRION" },
+    { hora: "02:00–05:30", arapiraca: "Prontidão", demais: "Prontidão" },
+    { hora: "05:30–06:10", arapiraca: "OPO 05 – AURORA", demais: "OPO 02 – FAUNO" },
+    { hora: "06:10–06:30", arapiraca: "Recolhimento à Sede do 3º BPM", demais: "Recolhimento à Sede do 3º BPM" },
+    { hora: "06:30–07:00", arapiraca: "Desarme de armamentos, equipamentos e veículos", demais: "Desarme de armamentos, equipamentos e veículos" }
+  ]
+};
+
+
 // =================== Utilidades ===================
 const $ = sel => document.querySelector(sel);
 const $$ = sel => Array.from(document.querySelectorAll(sel));
