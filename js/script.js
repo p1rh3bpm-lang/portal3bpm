@@ -155,12 +155,24 @@ function renderGrid(){
 }
 
 function switchTab(tab){
-  state.tab = tab; state.tag = "Todos"; // reset tag ao mudar de aba
-  $("#tab-op").setAttribute("aria-selected", tab==="op");
-  $("#tab-gestor").setAttribute("aria-selected", tab==="gestor");
+  state.tab = tab;
+  state.tag = "Todos";
+
+  $("#tab-op")?.setAttribute("aria-selected", tab==="op");
+  $("#tab-gestor")?.setAttribute("aria-selected", tab==="gestor");
+
   $("#painel-op").hidden = tab!=="op";
   $("#painel-gestor").hidden = tab!=="gestor";
-  renderTags(); renderGrid();
+
+  if (tab === "op" || tab === "gestor") {
+    renderTags();
+    renderGrid();
+  }
+
+  // >>> renderiza a Rotina somente quando o painel do Gestor estiver ativo
+  if (tab === "gestor") {
+    renderRotinaIntoGestor();
+  }
 }
 
 function ensureGestor(){
@@ -185,6 +197,74 @@ function renderVersion(){
   const d = new Date();
   $("#versao").textContent = `v1 • ${d.toLocaleDateString('pt-BR')} ${d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`;
 }
+
+const ROTINA = [
+  {
+    periodo: "Segunda a Quinta",
+    horarios: [
+      { hora: "07h00 – 07h25", atividade: "Cautela dos armamentos, equipamentos e veículos" },
+      { hora: "07h25 – 07h30", atividade: "Apresentação para Formatura Matinal" },
+      { hora: "07h30 – 07h45", atividade: "Preleção com o Oficial de Operações" },
+      { hora: "07h45 – 08h15", atividade: "Instrução Geral Básica" },
+      { hora: "08h15 – 09h00", atividade: "OPO 01 – ICARUS / OPO 02 – FAUNO" },
+      { hora: "09h00 – 09h30", atividade: "Deslocamento da Tropa" },
+      { hora: "09h30 – 11h30", atividade: "OPO 03 – ÓRION" },
+      { hora: "11h30 – 12h30", atividade: "OPO 04 – CERBERUS" },
+      { hora: "12h30 – 15h30", atividade: "Almoço / Prontidão" },
+      { hora: "15h30 – 17h00", atividade: "OPO 03 – ÓRION" },
+      { hora: "17h00 – 19h00", atividade: "OPO 04 – CERBERUS" },
+      { hora: "19h00 – 20h00", atividade: "Jantar / Prontidão" },
+      { hora: "20h00 – 21h30", atividade: "OPO 03 – ÓRION" },
+      { hora: "21h30 – 23h00", atividade: "OPO 04 – CERBERUS" },
+      { hora: "23h00 – 01h00", atividade: "OPO 03 – ÓRION" },
+      { hora: "01h00 – 05h00", atividade: "Prontidão" },
+      { hora: "05h00 – 06h00", atividade: "OPO 05 – AURORA / OPO 02 – FAUNO" },
+      { hora: "06h00 – 06h30", atividade: "Recolhimento à Sede do 3º BPM" },
+      { hora: "06h30 – 07h00", atividade: "Desarme dos armamentos, equipamentos e veículos" }
+    ]
+  },
+  {
+    periodo: "Sexta a Domingo",
+    horarios: [
+      { hora: "07h00 – 07h25", atividade: "Cautela dos armamentos, equipamentos e veículos" },
+      { hora: "07h25 – 07h30", atividade: "Apresentação para Formatura Matinal" },
+      { hora: "07h30 – 07h45", atividade: "Preleção com o Oficial de Operações" },
+      { hora: "07h45 – 08h30", atividade: "OPO 01 – ICARUS / OPO 02 – FAUNO" },
+      { hora: "08h30 – 09h00", atividade: "Deslocamento da Tropa" },
+      { hora: "09h00 – 10h30", atividade: "OPO 03 – ÓRION" },
+      { hora: "10h30 – 12h00", atividade: "OPO 06 – HERMES" },
+      { hora: "12h00 – 16h00", atividade: "Almoço / Prontidão" },
+      { hora: "16h00 – 18h00", atividade: "OPO 03 – ÓRION" },
+      { hora: "18h00 – 19h30", atividade: "OPO 06 – HERMES" },
+      { hora: "19h30 – 21h00", atividade: "Jantar / Prontidão" },
+      { hora: "21h00 – 22h30", atividade: "OPO 03 – ÓRION" },
+      { hora: "22h30 – 00h00", atividade: "OPO 06 – HERMES" },
+      { hora: "00h00 – 02h00", atividade: "OPO 03 – ÓRION" },
+      { hora: "02h00 – 05h30", atividade: "Prontidão" },
+      { hora: "05h30 – 06h10", atividade: "OPO 05 – AURORA / OPO 02 – FAUNO" },
+      { hora: "06h10 – 06h30", atividade: "Recolhimento à Sede do 3º BPM" },
+      { hora: "06h30 – 07h00", atividade: "Desarme dos armamentos, equipamentos e veículos" }
+    ]
+  }
+];
+
+function renderRotinaIntoGestor() {
+  const wrap = document.querySelector("#rotina-rp");
+  if (!wrap) return; // painel ainda não existe
+
+  wrap.innerHTML = ROTINA.map(r =>
+    `<article class="card">
+      <h3>${r.periodo}</h3>
+      <ul>
+        ${r.horarios.map(h => `<li><b>${h.hora}</b> – ${h.atividade}</li>`).join("")}
+      </ul>
+    </article>`
+  ).join("");
+
+  const empty = document.querySelector("#empty-rp");
+  if (empty) empty.hidden = ROTINA.length > 0;
+}
+
 
 // =================== Inicialização ===================
 (function init(){
