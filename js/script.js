@@ -294,22 +294,114 @@ const ROTINA = [
   }
 ];
 
+function parseInterval(hhmm) {
+  // "07:45–08:30" -> [dateStart, dateEnd] hoje na TZ local
+  const [a,b] = hhmm.split("–");
+  const [sh, sm] = a.split(":").map(Number);
+  const [eh, em] = b.split(":").map(Number);
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), sh, sm, 0);
+  const end   = new Date(now.getFullYear(), now.getMonth(), now.getDate(), eh, em, 0);
+  return [start, end];
+}
+
+function isNowBetween(hhmm) {
+  const now = new Date();
+  const [start, end] = parseInterval(hhmm);
+  return now >= start && now <= end;
+}
+
+function badgeFor(text) {
+  // Detecta “OPO XX – NOME” e devolve span com badge
+  const m = text.match(/OPO\\s*\\d+\\s*–\\s*([A-ZÁÉÍÓÚÃÕÇ]+|ÓRION)/i);
+  if (!m) return text;
+  const nome = m[1].toUpperCase().replace("Ó", "Ó").replace("ORION","ÓRION");
+  return text.replace(m[0], `<span class="badge-opo badge-${nome}">${m[0]}</span>`);
+}
+
+function rotinaPeriodoAtualKey() {
+  // 0=Dom ... 6=Sáb
+  const d = new Date().getDay();
+  return (d>=1 && d<=4) ? "Seg–Qui" : "Sex–Dom";
+}
+
 function renderRotinaIntoGestor() {
   const wrap = document.querySelector("#rotina-rp");
-  if (!wrap) return; // painel ainda não existe
+  if (!wrap) return;
 
-  wrap.innerHTML = ROTINA.map(r =>
-    `<article class="card">
-      <h3>${r.periodo}</h3>
-      <ul>
-        ${r.horarios.map(h => `<li><b>${h.hora}</b> – ${h.atividade}</li>`).join("")}
-      </ul>
-    </article>`
-  ).join("");
+  const key = rotinaPeriodoAtualKey();
+  const rows = ROTINA_GRID[key] || [];
+  let nextInfo = "";
 
-  const empty = document.querySelector("#empty-rp");
-  if (empty) empty.hidden = ROTINA.length > 0;
+  // Descobre a próxima atividade
+  const now = new Date();
+  const next = rows.find(r => {
+    const [start] = parseInterval(r.hora);
+    return start > now;
+  });
+  if (next) {
+    nextInfo = `Próxima: <b>${next.hora}</b> — <b>Arapiraca:</b> ${next.arapiraca} | <b>Demais:</b> ${next.demais}`;
+  }
+
+  // Toolbar (seleção de período + ações)
+  const toolbar = `
+    <div class="toolbar">
+      <label class="muted">Período:</label>
+      <select id="rotinaSel" class="input">
+        ${Object.keys(ROTINA_GRID).map(k=>`<option value="${k}" ${k===key?'selected':''}>${k}</option>`).join("")}
+      </select>
+      <button id="btnPrint" class="btn">Imprimir/Salvar PDF</button>
+      <span class="muted" id="nextInfo" style="margin-left:auto">${nextInfo}</span>
+    </div>
+  `;
+
+  // Tabela
+  const table = `
+    <div class="table-wrap">
+      <table class="rotina">
+        <thead>
+          <tr><th style="width:140px">Hora</th><th>ARAPIRACA</th><th>Demais Cidades</th></tr>
+        </thead>
+        <tbody>
+          ${rows.map(r => `
+            <tr class="${isNowBetween(r.hora) ? 'now' : ''}">
+              <td><b>${r.hora}</b></td>
+              <td>${badgeFor(r.arapiraca)}</td>
+              <td>${badgeFor(r.demais)}</td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  wrap.innerHTML = toolbar + table;
+
+  // Eventos
+  const sel = document.querySelector("#rotinaSel");
+  sel?.addEventListener("change", e => {
+    // Renderiza outro período mantendo no painel
+    const k = e.target.value;
+    // troca os rows e redesenha apenas tbody + próxima atividade
+    const rows2 = ROTINA_GRID[k] || [];
+    const tbody = wrap.querySelector("tbody");
+    tbody.innerHTML = rows2.map(r => `
+      <tr class="${isNowBetween(r.hora) ? 'now' : ''}">
+        <td><b>${r.hora}</b></td>
+        <td>${badgeFor(r.arapiraca)}</td>
+        <td>${badgeFor(r.demais)}</td>
+      </tr>
+    `).join("");
+
+    const now2 = new Date();
+    const next2 = rows2.find(r => parseInterval(r.hora)[0] > now2);
+    const nextEl = document.querySelector("#nextInfo");
+    nextEl.innerHTML = next2 ? `Próxima: <b>${next2.hora}</b> — <b>Arapiraca:</b> ${next2.arapiraca} | <b>Demais:</b> ${next2.demais}` : "";
+  });
+
+  document.querySelector("#btnPrint")?.addEventListener("click", () => window.print());
 }
+
 
 
 // =================== Inicialização ===================
