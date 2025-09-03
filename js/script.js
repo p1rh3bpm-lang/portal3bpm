@@ -6,7 +6,7 @@ const ADMIN_PIN = "1234"; // <<< Altere o PIN aqui
 const OPERACOES = [
   {
     title: "OPO 01 – ICARUS: Garantindo a Ordem",
-    url: "#",
+    url: "https://drive.google.com/file/d/17PM6esUXDYGbsgpAA7gX0BN4bdLLjOx3/view?usp=drive_link",
     desc: "Fiscalização ostensiva com blitzes estratégicas e lavratura de TCOs para prevenir acidentes, reduzir riscos e fortalecer a sensação de segurança.",
     tags: ["urbano","arapiraca"],
     status: "Vigente",
@@ -15,7 +15,7 @@ const OPERACOES = [
   },
   {
     title: "OPO 02 – FAUNO: Sentinela das Trilhas",
-    url: "#",
+    url: "https://drive.google.com/file/d/1I1fAouJ2VWihf6NCmgrs7McqFPY7ZBEN/view?usp=drive_link",
     desc: "Reforço policial e fiscalização de trânsito em zonas rurais de Arapiraca e demais cidades, prevenindo acidentes e garantindo mobilidade segura.",
     tags: ["rural","trânsito"],
     status: "Vigente",
@@ -24,7 +24,7 @@ const OPERACOES = [
   },
   {
     title: "OPO 03 – ÓRION: Batalhão Vigilante",
-    url: "#",
+    url: "https://drive.google.com/file/d/11nKbhyXGYi2dC4zZqHFT7MCV2msxslx9/view?usp=drive_link",
     desc: "Integra ações preventivas, repressivas e de inteligência para reduzir crimes violentos, receptação e infrações viárias.",
     tags: ["urbano","rodovia"],
     status: "Vigente",
@@ -33,7 +33,7 @@ const OPERACOES = [
   },
   {
     title: "OPO 04 – CERBERUS: Sentinela Escolar",
-    url: "#",
+    url: "https://drive.google.com/file/d/1Vl2wW08mb8OHVExRgrmwOoxg4YhRH5Z5/view?usp=drive_link",
     desc: "Proteção da comunidade escolar com ações preventivas contra transporte irregular, drogas, álcool e crimes nas imediações das escolas.",
     tags: ["escolar","prevenção"],
     status: "Vigente",
@@ -42,7 +42,7 @@ const OPERACOES = [
   },
   {
     title: "OPO 05 – AURORA: Garantindo a Ordem",
-    url: "#",
+    url: "https://drive.google.com/file/d/1sBZq2oiTRCDw1EL0M7JIhQ7esJCwNhAK/view?usp=drive_link",
     desc: "Fiscalização ostensiva para coibir infrações de trânsito e condutas que coloquem terceiros em risco, com blitzes e abordagens educativas.",
     tags: ["arapiraca","trânsito"],
     status: "Vigente",
@@ -51,7 +51,7 @@ const OPERACOES = [
   },
   {
     title: "OPO 06 – HERMES: Repressão ao Tráfico em Trânsito",
-    url: "#",
+    url: "https://drive.google.com/file/d/1tyos0GgaqhHf9e9u09Wzl4Sv3BkE1UY-/view?usp=drive_link",
     desc: "Foco em repressão ao tráfico durante deslocamentos, com patrulhamentos em horários de maior risco.",
     tags: ["rodovia","tráfico"],
     status: "Vigente",
