@@ -470,6 +470,8 @@ function renderDistribuicaoRP() {
 // =================== Inicialização ===================
 (function init(){
   renderVersion();
+  
+  document.getElementById("year").textContent = new Date().getFullYear();
 
   // Abas
   $("#tab-op").addEventListener("click", ()=> switchTab("op"));
