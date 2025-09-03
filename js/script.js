@@ -471,7 +471,8 @@ function renderDistribuicaoRP() {
 (function init(){
   renderVersion();
   
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 
   // Abas
   $("#tab-op").addEventListener("click", ()=> switchTab("op"));
