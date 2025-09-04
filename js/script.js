@@ -240,7 +240,8 @@ function cardHTML(l, nsStore){
       ${l.status?`<span class="badge ${badge}">${l.status}</span>`:""}
       ${l.periodo?`<span class="badge">${l.periodo}</span>`:""}
       ${l.responsavel?`<span class="badge">Resp.: ${l.responsavel}</span>`:""}
-      ${(l.tags||[]).map(t=>`<span class="badge">#${t}</span>`).join(" ")}
+      <!-- REMOVIDO: tags -->
+      <!-- ${(l.tags||[]).map(t=>`<span class="badge">#${t}</span>`).join(" ")} -->
     </div>
     ${l.desc ? `<p>${l.desc}</p>` : ""}
     <div class="actions">
