@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+  <!-- Metadados e assets principais -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portal do 3º BPM – Operações & Gestor</title>
@@ -11,6 +12,7 @@
 </head>
 <body>
   <div class="container">
+    <!-- Cabeçalho (logo + título + versão) -->
     <header>
       <div class="brand">
         <img src="assets/logo.svg" alt="3º BPM" class="logo" />
@@ -22,11 +24,13 @@
       <div class="muted" id="versao"></div>
     </header>
 
+    <!-- Abas de navegação -->
     <nav class="tabs" role="tablist" aria-label="Seções">
       <button class="tab" id="tab-op" role="tab" aria-selected="true" aria-controls="painel-op">Operações Vigentes</button>
       <button class="tab" id="tab-gestor" role="tab" aria-selected="false" aria-controls="painel-gestor">Gestor (Restrito)</button>
     </nav>
 
+    <!-- Barra de busca + seletor de status -->
     <div class="bar">
       <label class="search" aria-label="Pesquisar">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/></svg>
@@ -43,29 +47,23 @@
       </div>
     </div>
 
-    <!-- Tags colapsáveis -->
-    <details id="filtros" class="filters">
-      <summary>Filtrar por tags</summary>
-      <div id="tags" class="tags" role="toolbar" aria-label="Filtrar por tags"></div>
-    </details>
+    <!-- Área de chips (tags) -->
+    <div id="tags" class="tags" role="toolbar" aria-label="Filtrar por tags"></div>
 
-    <!-- Painel Operações -->
+    <!-- Painel: Operações (público) -->
     <section id="painel-op" role="tabpanel" aria-labelledby="tab-op">
       <div id="grid-op" class="grid" role="list"></div>
       <div id="empty-op" class="empty" hidden>Nenhum item encontrado. Ajuste filtros ou busca.</div>
     </section>
 
-    <!-- Painel Gestor -->
+    <!-- Painel: Gestor (restrito por PIN) -->
     <section id="painel-gestor" role="tabpanel" aria-labelledby="tab-gestor" hidden>
-      <div class="muted" style="margin-bottom:8px">
-        Área restrita. Para sigilo real, use proteção de servidor (Netlify password/Identity). Este PIN é apenas controle local do navegador.
-      </div>
-
+      <div class="muted" style="margin-bottom:8px">Área restrita. Para sigilo real, use proteção de servidor (Netlify password/Identity). Este PIN é apenas controle local do navegador.</div>
       <div id="grid-gestor" class="grid" role="list"></div>
 
-      <!-- Distribuição de RP por Turno (primeiro) -->
-      <hr class="sep">
-      <h2 class="h2">Distribuição de RP por Turno</h2>
+      <!-- Distribuição de RP por Turno -->
+      <hr style="border:0;border-top:1px dashed var(--ring);margin:18px 0;">
+      <h2 style="margin:0 0 6px 0;font-size:18px;">Distribuição de RP por Turno</h2>
       <div class="muted" style="margin-bottom:8px">Consulta por turno e por cidade.</div>
 
       <div class="toolbar">
@@ -95,24 +93,28 @@
         </table>
       </div>
 
-      <!-- Rotina RP (depois) -->
-      <hr class="sep">
-      <h2 class="h2">Rotina RP</h2>
-      <div class="muted" style="margin-bottom:8px">Rotina de Serviço – Radiopatrulha – 3º BPM.</div>
+      <!-- Rotina RP -->
+      <hr style="border:0;border-top:1px dashed var(--ring);margin:18px 0;">
+      <h2 style="margin:0 0 6px 0;font-size:18px;">Rotina RP</h2>
+      <div class="muted" style="margin-bottom:8px">
+        Rotina de Serviço – Radiopatrulha – 3º BPM.
+      </div>
       <div id="rotina-rp" class="grid" role="list"></div>
       <div id="empty-rp" class="empty" hidden>Nenhum dado de rotina encontrado.</div>
 
       <div id="empty-gestor" class="empty" hidden>Nenhum item encontrado. Ajuste filtros ou busca.</div>
     </section>
 
+    <!-- Rodapé -->
     <footer class="footer" id="siteFoot">
       &copy; <span id="year"></span> — P3 · 3º BPM. Todos os direitos reservados.
     </footer>
   </div>
 
+  <!-- Toast (avisos) -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <!-- Modal de PIN do Gestor -->
+  <!-- Modal: PIN do Gestor -->
   <div id="modal" class="modal" aria-modal="true" role="dialog" aria-labelledby="ttlModal">
     <div class="sheet">
       <h2 id="ttlModal">Acesso do Gestor</h2>
@@ -124,6 +126,7 @@
     </div>
   </div>
 
+  <!-- Script principal -->
   <script src="js/script.js"></script>
 </body>
 </html>
