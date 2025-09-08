@@ -1,23 +1,6 @@
 <!doctype html>
-<main id="app" hidden>
-  <!-- Tela de Login/Cadastro -->
-<div id="gate" class="login-gate">
-  <div class="panel">
-    <h1>Portal do 3º BPM</h1>
-    <p class="muted">Acesso restrito. Faça login ou cadastre-se para continuar.</p>
-
-    <div class="row">
-      <button id="btnLogin"  class="btn primary">Entrar</button>
-      <button id="btnSignup" class="btn">Cadastrar</button>
-    </div>
-
-    <small class="muted">Autenticação gerenciada por Netlify Identity</small>
-  </div>
-</div>
 <html lang="pt-BR">
 <head>
-  <!-- Netlify Identity (precisa estar presente na página) -->
-  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <!-- Metadados e assets principais -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +9,9 @@
   <meta name="theme-color" content="#0ea5e9" />
   <link rel="icon" href="assets/logo.svg" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- ADICIONADO: Netlify Identity (necessário para login/cadastro e papéis) -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <div class="container">
@@ -143,8 +129,20 @@
     </div>
   </div>
 
+  <!-- ADICIONADO: Overlay de Login/Cadastro (Identity) -->
+  <div id="gate" class="login-gate" hidden>
+    <div class="panel">
+      <h1>Portal do 3º BPM</h1>
+      <p class="muted">Acesso restrito. Faça login ou cadastre-se para continuar.</p>
+      <div class="row">
+        <button id="btnLogin"  class="btn primary">Entrar</button>
+        <button id="btnSignup" class="btn">Cadastrar</button>
+      </div>
+      <small class="muted">Autenticação gerenciada por Netlify Identity</small>
+    </div>
+  </div>
+
   <!-- Script principal -->
   <script src="js/script.js"></script>
 </body>
-</main>
 </html>
