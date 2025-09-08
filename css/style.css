@@ -79,7 +79,7 @@ h1{font-size:clamp(20px,3.5vw,28px); margin:0; letter-spacing:.2px}
 .note{font-size:12px; color:var(--muted)}
 
 /* ---------- Tabelas (Rotina/Distribuição) ---------- */
-.table-wrap{overflow:auto; border:1px solid var(--ring); border-radius:12px; background:var(--card)}
+.table-wrap{overflow:auto; border:1px solid var(--ring); border-radius:12px; background:var(--card); width: 100%;}
 table.rotina{width:100%; border-collapse:separate; border-spacing:0}
 table.rotina th, table.rotina td{padding:10px 12px; border-bottom:1px solid var(--ring); text-align:left; font-size:14px}
 table.rotina th{position:sticky; top:0; background:var(--card); z-index:1}
