@@ -209,10 +209,9 @@ const state = { tab: "op", q: "", status: "Todos", tag: "Todos", gestorOK: false
 function uniqueTags(list){ const s = new Set(); list.forEach(l => (l.tags||[]).forEach(t => s.add(t))); return ["Todos", ...Array.from(s).sort((a,b)=>a.localeCompare(b))]; }
 
 function renderTags(){
-  const list = state.tab === "op" ? OPERACOES : RESTRITOS;
-  const wrap = $("#tags");
-  wrap.innerHTML = uniqueTags(list).map(t=>`<button class="chip" role="button" aria-pressed="${state.tag===t}" data-tag="${t}">${t}</button>`).join("");
-  wrap.onclick = (e)=>{ const btn = e.target.closest(".chip"); if(!btn) return; state.tag = btn.dataset.tag; renderGrid(); };
+  const wrap = document.querySelector("#tags");
+  if (!wrap) return;        // se não existe a área, não faz nada
+  wrap.innerHTML = "";       // se existir, mantemos vazio
 }
 
 function matches(l){
