@@ -211,8 +211,9 @@ function uniqueTags(list){ const s = new Set(); list.forEach(l => (l.tags||[]).f
 function renderTags(){
   const list = state.tab === "op" ? OPERACOES : RESTRITOS;
   const wrap = $("#tags");
-  wrap.innerHTML = "";
-  }
+  wrap.innerHTML = uniqueTags(list).map(t=>`<button class="chip" role="button" aria-pressed="${state.tag===t}" data-tag="${t}">${t}</button>`).join("");
+  wrap.onclick = (e)=>{ const btn = e.target.closest(".chip"); if(!btn) return; state.tag = btn.dataset.tag; renderGrid(); };
+}
 
 function matches(l){
   const byStatus = state.status === "Todos" || (l.status||"") === state.status;
