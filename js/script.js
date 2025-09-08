@@ -553,4 +553,55 @@ switchTab = function(tab) {
   } else {
     switchTab('op');
   }
+
+  // ======== LOGIN GATE (Netlify Identity) ========
+(function authGate(){
+  const app  = document.getElementById("app");
+  const gate = document.getElementById("gate");
+
+  function showApp(visible){
+    if (!app || !gate) return;
+    app.hidden  = !visible;
+    gate.hidden =  visible;
+  }
+
+  // Botões do overlay
+  document.getElementById("btnLogin")?.addEventListener("click", ()=>{
+    if (window.netlifyIdentity) netlifyIdentity.open("login");
+  });
+  document.getElementById("btnSignup")?.addEventListener("click", ()=>{
+    if (window.netlifyIdentity) netlifyIdentity.open("signup");
+  });
+
+  // Quando o script do Identity já estiver carregado…
+  if (window.netlifyIdentity) {
+    // 1) Ao inicializar, decide se mostra o app ou o gate
+    netlifyIdentity.on("init", (user)=>{
+      showApp(!!user);
+      // Se não logado, quando logar fecha o widget e mostra app
+      if (!user) {
+        netlifyIdentity.on("login", ()=>{
+          netlifyIdentity.close();
+          showApp(true);
+          // recarrega pra garantir tokens/estado (opcional)
+          // location.reload();
+        });
+      }
+    });
+
+    // 2) Logout volta pro gate
+    netlifyIdentity.on("logout", ()=>{
+      showApp(false);
+      // Opcional: limpar qualquer cache local seu
+      // localStorage.removeItem("bpmPortalGestorOK");
+    });
+
+    // 3) Inicia o Identity (lê usuário salvo no navegador)
+    netlifyIdentity.init();
+  } else {
+    // Se o script do Identity não carregou, não deixa ver o app
+    showApp(false);
+    console.warn("Netlify Identity não carregou.");
+  }
+})();
 })();
