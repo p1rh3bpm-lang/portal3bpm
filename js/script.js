@@ -556,7 +556,7 @@ switchTab = function(tab) {
 
   // ======== LOGIN GATE (Netlify Identity) ========
 (function authGate(){
-  const app  = document.getElementById("app");
+  const app  = document.getElementById("app") || document.querySelector(".container");
   const gate = document.getElementById("gate");
 
   function showApp(visible){
@@ -599,8 +599,7 @@ switchTab = function(tab) {
     // 3) Inicia o Identity (lê usuário salvo no navegador)
     netlifyIdentity.init();
   } else {
-    // Se o script do Identity não carregou, não deixa ver o app
-    showApp(false);
+    // Se o script do Identity não carregou, mantém tudo como está (sem gate)
     console.warn("Netlify Identity não carregou.");
   }
 })();
