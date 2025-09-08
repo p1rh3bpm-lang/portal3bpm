@@ -102,23 +102,8 @@ tr.now td{outline:2px solid var(--accent); outline-offset:-2px}
 /* ---------- Chips de RP na tabela ---------- */
 .rp-badge{display:inline-block; padding:2px 8px; margin:2px 4px 0 0; border-radius:10px; border:1px solid var(--ring); font-size:12px}
 
+/* Esconde a linha de URL apenas na aba Operações */
+#painel-op .url { 
+  display: none !important;
+}
 
-/* ===== Login Gate (overlay de login/cadastro) ===== */
-.login-gate{
-  position: fixed; inset: 0;
-  display: grid; place-items: center;
-  background: radial-gradient(1200px 800px at 20% -10%, rgba(34,211,238,.10), transparent 60%),
-              radial-gradient(900px 800px at 120% 0%, rgba(14,165,233,.10), transparent 60%),
-              var(--bg);
-  z-index: 9999;
-}
-.login-gate .panel{
-  width: min(520px, 92vw);
-  background: var(--card);
-  border: 1px solid var(--ring);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-}
-.login-gate .panel h1{ margin: 0 0 6px 0; font-size: 22px; }
-.login-gate .panel .row{ display:flex; gap:10px; justify-content:center; margin: 12px 0 6px; }
