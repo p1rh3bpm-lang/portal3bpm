@@ -494,11 +494,10 @@ function renderDistribuicaoRP() {
   // Abas
   $("#tab-op").addEventListener("click", ()=> switchTab("op"));
   $("#tab-gestor").addEventListener("click", ()=> ensureGestor());
-  $("#tab-escala")?.addEventListener("click", ()=> switchTab("escala"));
 
   // Filtros comuns (Operações/Gestor)
-  $("#q")?.addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
-  $("#statusSel")?.addEventListener("change", e=>{ state.status = e.target.value; renderGrid(); });
+  $("#q").addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
+  $("#statusSel").addEventListener("change", e=>{ state.status = e.target.value; renderGrid(); });
 
   // PIN Gestor
   $("#pinBtn").addEventListener("click", checkPin);
@@ -545,7 +544,7 @@ switchTab = function(tab) {
   }
 };
   // ======= FIM do patch =======
-  
+
   // Navegação direta via hash (#gestor) respeitando PIN
   const hash = location.hash.replace('#','');
   if (hash === 'gestor') {
@@ -553,95 +552,4 @@ switchTab = function(tab) {
   } else {
     switchTab('op');
   }
-
-  // ---------- Escala: ações rápidas ----------
-function initEscalaControls(){
-  const iframe = document.getElementById("escalaPdfFrame");
-  const btnOpen = document.getElementById("btnOpenPdf");
-  const btnDownload = document.getElementById("btnDownloadPdf");
-  const btnShowTable = document.getElementById("btnShowTable");
-  const wrapTable = document.getElementById("escalaTableWrap");
-
-  // URL ABSOLUTA do PDF no seu site:
-  const PDF_URL = `${location.origin}/escala/escala-setembro-2025.pdf`;
-
-  // Heurística simples para mobile / iOS
-  const ua = navigator.userAgent || "";
-  const isIOS = /iPad|iPhone|iPod/i.test(ua);
-  const isAndroid = /Android/i.test(ua);
-  const isSmallScreen = window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
-
-  // Se mobile, usar Google Viewer como fallback (muitos não renderizam PDF inline)
-  if (isIOS || isAndroid || isSmallScreen) {
-    const viewer = `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(PDF_URL)}`;
-    if (iframe) iframe.src = viewer;
-  } else {
-    if (iframe) iframe.src = PDF_URL; // desktop usa o PDF direto
-  }
-
-  btnOpen?.addEventListener("click", ()=>{
-    window.open(PDF_URL, "_blank");
-  });
-
-  btnDownload?.addEventListener("click", ()=>{
-    const a = document.createElement('a');
-    a.href = PDF_URL;
-    a.download = "escala-setembro-2025.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  });
-
-  btnShowTable?.addEventListener("click", ()=>{
-    if (!iframe || !wrapTable) return;
-
-    if (wrapTable.style.display === "block") {
-      wrapTable.style.display = "none";
-      iframe.style.display = "block";
-      btnShowTable.textContent = "Exibir como tabela";
-      return;
-    }
-
-    if (!wrapTable.innerHTML.trim()) {
-      wrapTable.innerHTML = `<div style="padding:16px" class="muted">
-        Aguardando conversão do PDF para tabela. Se quiser, eu extraio e monto essa tabela pra você.
-      </div>`;
-    }
-
-    wrapTable.style.display = "block";
-    iframe.style.display = "none";
-    btnShowTable.textContent = "Voltar ao PDF";
-  });
-}
-
-
-// Integração com switchTab: suportar 'escala'
-const _oldSwitchTab2 = switchTab;
-switchTab = function(tab){
-  if(tab === 'escala'){
-    // acessível sem PIN; ajustar aria-selected nas tabs
-    $("#tab-op")?.setAttribute("aria-selected", false);
-    $("#tab-gestor")?.setAttribute("aria-selected", false);
-    $("#tab-escala")?.setAttribute("aria-selected", true);
-
-    $("#painel-op").hidden = true;
-    $("#painel-gestor").hidden = true;
-    $("#painel-escala").hidden = false;
-
-    // inicia controles (uma vez)
-    if (!switchTab._escalaInit) {
-      initEscalaControls();
-      switchTab._escalaInit = true;
-    }
-
-  } else {
-    // fallback para o comportamento original
-    _oldSwitchTab2(tab);
-  }
-};
-
-// inicializa caso a página abra com #escala
-if(location.hash.replace('#','') === 'escala'){
-  switchTab('escala');
-}
 })();
