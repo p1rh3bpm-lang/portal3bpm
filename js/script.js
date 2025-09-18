@@ -576,7 +576,7 @@ function initEscalaControls(){
   btnDownload?.addEventListener("click", ()=>{
     const link = document.createElement('a');
     link.href = iframe.src;
-    link.download = "escala_setembro_2025.pdf";
+    link.download = "escala-setembro-2025.pdf";
     document.body.appendChild(link);
     link.click();
     link.remove();
