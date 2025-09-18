@@ -545,6 +545,89 @@ switchTab = function(tab) {
 };
   // ======= FIM do patch =======
 
+  // ---------- Escala: ações rápidas ----------
+function initEscalaControls(){
+  const tabBtn = document.getElementById("tab-escala");
+  const painel = document.getElementById("painel-escala");
+  const iframe = document.getElementById("escalaPdfFrame");
+  const wrapTable = document.getElementById("escalaTableWrap");
+  const btnOpen = document.getElementById("btnOpenPdf");
+  const btnDownload = document.getElementById("btnDownloadPdf");
+  const btnShowTable = document.getElementById("btnShowTable");
+
+  tabBtn?.addEventListener("click", ()=>{
+    // ocultar outras abas e mostrar esta
+    switchTab('escala'); // we'll add switchTab handling below
+  });
+
+  btnOpen?.addEventListener("click", ()=>{
+    const url = iframe.src;
+    window.open(url, "_blank");
+  });
+
+  btnDownload?.addEventListener("click", ()=>{
+    const link = document.createElement('a');
+    link.href = iframe.src;
+    link.download = "escala_setembro_2025.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  });
+
+  btnShowTable?.addEventListener("click", async ()=>{
+    // Se já está visível, alterna para o iframe
+    if (wrapTable.style.display === "block") {
+      wrapTable.style.display = "none";
+      iframe.style.display = "block";
+      btnShowTable.textContent = "Exibir como tabela";
+      return;
+    }
+
+    // Tentativa de renderizar tabela: primeiro verifica se já temos HTML populado
+    if (!wrapTable.innerHTML.trim()) {
+      // Exibição provisória: mensagem de processo
+      wrapTable.innerHTML = `<div style="padding:16px" class="muted">Aguardando conversão do PDF para tabela. Se desejar, eu posso extrair a escala e montar a tabela agora.</div>`;
+      // Obs: aqui podemos tentar uma extração automática via servidor/worker. 
+      // Por enquanto deixamos uma ação manual (eu posso fazer isso para você).
+    }
+
+    wrapTable.style.display = "block";
+    iframe.style.display = "none";
+    btnShowTable.textContent = "Voltar ao PDF";
+  });
+}
+
+// Integração com switchTab: suportar 'escala'
+const _oldSwitchTab2 = switchTab;
+switchTab = function(tab){
+  if(tab === 'escala'){
+    // acessível sem PIN; ajustar aria-selected nas tabs
+    $("#tab-op")?.setAttribute("aria-selected", false);
+    $("#tab-gestor")?.setAttribute("aria-selected", false);
+    $("#tab-escala")?.setAttribute("aria-selected", true);
+
+    $("#painel-op").hidden = true;
+    $("#painel-gestor").hidden = true;
+    $("#painel-escala").hidden = false;
+
+    // inicia controles (uma vez)
+    if (!switchTab._escalaInit) {
+      initEscalaControls();
+      switchTab._escalaInit = true;
+    }
+
+  } else {
+    // fallback para o comportamento original
+    _oldSwitchTab2(tab);
+  }
+};
+
+// inicializa caso a página abra com #escala
+if(location.hash.replace('#','') === 'escala'){
+  switchTab('escala');
+}
+
+
   // Navegação direta via hash (#gestor) respeitando PIN
   const hash = location.hash.replace('#','');
   if (hash === 'gestor') {
