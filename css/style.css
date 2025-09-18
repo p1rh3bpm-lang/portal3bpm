@@ -107,10 +107,3 @@ tr.now td{outline:2px solid var(--accent); outline-offset:-2px}
   display: none !important;
 }
 
-/* Escala - complementos */
-#escalaPdfFrame { border-radius:12px; box-shadow:0 8px 24px rgba(2,6,23,.25); }
-#escalaTableWrap table { width:100%; border-collapse:collapse; }
-#escalaTableWrap th, #escalaTableWrap td { padding:8px 10px; border-bottom:1px solid var(--ring); text-align:left; font-size:13px; }
-#escalaTableWrap tr.now td { outline:2px solid var(--accent); outline-offset:-2px; background:rgba(14,165,233,.03); }
-
-
