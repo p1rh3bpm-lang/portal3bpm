@@ -556,34 +556,45 @@ switchTab = function(tab) {
 
   // ---------- Escala: ações rápidas ----------
 function initEscalaControls(){
-  const painel = document.getElementById("painel-escala");
   const iframe = document.getElementById("escalaPdfFrame");
-  const wrapTable = document.getElementById("escalaTableWrap");
   const btnOpen = document.getElementById("btnOpenPdf");
   const btnDownload = document.getElementById("btnDownloadPdf");
   const btnShowTable = document.getElementById("btnShowTable");
+  const wrapTable = document.getElementById("escalaTableWrap");
 
-  tabBtn?.addEventListener("click", ()=>{
-    // ocultar outras abas e mostrar esta
-    switchTab('escala'); // we'll add switchTab handling below
-  });
+  // URL ABSOLUTA do PDF no seu site:
+  const PDF_URL = `${location.origin}/escala/escala-setembro-2025.pdf`;
+
+  // Heurística simples para mobile / iOS
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPad|iPhone|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const isSmallScreen = window.matchMedia && window.matchMedia("(max-width: 768px)").matches;
+
+  // Se mobile, usar Google Viewer como fallback (muitos não renderizam PDF inline)
+  if (isIOS || isAndroid || isSmallScreen) {
+    const viewer = `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(PDF_URL)}`;
+    if (iframe) iframe.src = viewer;
+  } else {
+    if (iframe) iframe.src = PDF_URL; // desktop usa o PDF direto
+  }
 
   btnOpen?.addEventListener("click", ()=>{
-    const url = iframe.src;
-    window.open(url, "_blank");
+    window.open(PDF_URL, "_blank");
   });
 
   btnDownload?.addEventListener("click", ()=>{
-    const link = document.createElement('a');
-    link.href = iframe.src;
-    link.download = "escala-setembro-2025.pdf";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    const a = document.createElement('a');
+    a.href = PDF_URL;
+    a.download = "escala-setembro-2025.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   });
 
-  btnShowTable?.addEventListener("click", async ()=>{
-    // Se já está visível, alterna para o iframe
+  btnShowTable?.addEventListener("click", ()=>{
+    if (!iframe || !wrapTable) return;
+
     if (wrapTable.style.display === "block") {
       wrapTable.style.display = "none";
       iframe.style.display = "block";
@@ -591,12 +602,10 @@ function initEscalaControls(){
       return;
     }
 
-    // Tentativa de renderizar tabela: primeiro verifica se já temos HTML populado
     if (!wrapTable.innerHTML.trim()) {
-      // Exibição provisória: mensagem de processo
-      wrapTable.innerHTML = `<div style="padding:16px" class="muted">Aguardando conversão do PDF para tabela. Se desejar, eu posso extrair a escala e montar a tabela agora.</div>`;
-      // Obs: aqui podemos tentar uma extração automática via servidor/worker. 
-      // Por enquanto deixamos uma ação manual (eu posso fazer isso para você).
+      wrapTable.innerHTML = `<div style="padding:16px" class="muted">
+        Aguardando conversão do PDF para tabela. Se quiser, eu extraio e monto essa tabela pra você.
+      </div>`;
     }
 
     wrapTable.style.display = "block";
@@ -604,6 +613,7 @@ function initEscalaControls(){
     btnShowTable.textContent = "Voltar ao PDF";
   });
 }
+
 
 // Integração com switchTab: suportar 'escala'
 const _oldSwitchTab2 = switchTab;
