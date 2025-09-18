@@ -544,7 +544,16 @@ switchTab = function(tab) {
   }
 };
   // ======= FIM do patch =======
-// ---------- Escala: ações rápidas ----------
+  
+  // Navegação direta via hash (#gestor) respeitando PIN
+  const hash = location.hash.replace('#','');
+  if (hash === 'gestor') {
+    if(state.gestorOK) switchTab('gestor'); else ensureGestor();
+  } else {
+    switchTab('op');
+  }
+
+  // ---------- Escala: ações rápidas ----------
 function initEscalaControls(){
   const tabBtn = document.getElementById("tab-escala");
   const painel = document.getElementById("painel-escala");
@@ -625,13 +634,4 @@ switchTab = function(tab){
 if(location.hash.replace('#','') === 'escala'){
   switchTab('escala');
 }
-
-  
-  // Navegação direta via hash (#gestor) respeitando PIN
-  const hash = location.hash.replace('#','');
-  if (hash === 'gestor') {
-    if(state.gestorOK) switchTab('gestor'); else ensureGestor();
-  } else {
-    switchTab('op');
-  }
 })();
