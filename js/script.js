@@ -292,6 +292,7 @@ function switchTab(tab){
 
   $("#tab-op")?.setAttribute("aria-selected", tab==="op");
   $("#tab-gestor")?.setAttribute("aria-selected", tab==="gestor");
+  $("#tab-escala")?.addEventListener("click", ()=> switchTab("escala"));
 
   $("#painel-op").hidden = tab!=="op";
   $("#painel-gestor").hidden = tab!=="gestor";
@@ -496,8 +497,8 @@ function renderDistribuicaoRP() {
   $("#tab-gestor").addEventListener("click", ()=> ensureGestor());
 
   // Filtros comuns (Operações/Gestor)
-  $("#q").addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
-  $("#statusSel").addEventListener("change", e=>{ state.status = e.target.value; renderGrid(); });
+  $("#q")?.addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
+  $("#statusSel")?.addEventListener("change", e=>{ state.status = e.target.value; renderGrid(); });
 
   // PIN Gestor
   $("#pinBtn").addEventListener("click", checkPin);
@@ -547,7 +548,6 @@ switchTab = function(tab) {
 
   // ---------- Escala: ações rápidas ----------
 function initEscalaControls(){
-  const tabBtn = document.getElementById("tab-escala");
   const painel = document.getElementById("painel-escala");
   const iframe = document.getElementById("escalaPdfFrame");
   const wrapTable = document.getElementById("escalaTableWrap");
