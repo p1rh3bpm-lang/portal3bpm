@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escala Operacional - Setembro/2025</title>
+<style>
+:root {
+  --bg:#0b1220; --fg:#e6edf3; --muted:#9fb0c5; --ring:#223047; --acc:#3aa0ff;
+  --card:#0f182b; --chip:#13203a;
+}
+html,body{background:var(--bg); color:var(--fg); margin:0; font:14px/1.5 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+.container{max-width:1200px;margin:24px auto;padding:0 16px;}
+h1{margin:0 0 12px;font-size:24px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+select,input[type="search"],button{background:var(--card);color:var(--fg);border:1px solid var(--ring);border-radius:10px;padding:8px 10px}
+.table-wrap{background:var(--card);border:1px solid var(--ring);border-radius:12px;overflow:auto;box-shadow:0 8px 24px rgba(2,6,23,.25);}
+table{border-collapse:collapse;min-width:960px;width:100%}
+th,td{padding:10px 12px;border-bottom:1px solid var(--ring);text-align:left;white-space:nowrap}
+thead th{position:sticky;top:0;background:#0f192e;z-index:1}
+tfoot td{background:#0f192e;color:var(--muted)}
+.badge{display:inline-block;padding:.1rem .5rem;border-radius:999px;background:var(--chip);border:1px solid var(--ring);font-size:12px}
+a.btn{text-decoration:none;display:inline-block}
+.btn-acc{background:var(--acc);color:#001627;border-color:transparent}
+small.muted{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Escala Operacional — Setembro/2025</h1>
+  <div class="controls">
+    <label>Grupo:
+      <select id="fGrupo"><option value="">Todos</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>
+    </label>
+    <label>Setor:
+      <select id="fSetor"><option value="">Todos</option><option value="ARMEIROS">ARMEIROS</option><option value="CANIL">CANIL</option><option value="COPOM">COPOM</option><option value="PELOPES">PELOPES</option><option value="POLICIAMENTO MONTADO">POLICIAMENTO MONTADO</option><option value="VISTORIADOR DAS VIATURAS">VISTORIADOR DAS VIATURAS</option></select>
+    </label>
+    <label>Jornada:
+      <select id="fJornada"><option value="">Todos</option><option value="12h">12h</option><option value="24x72h">24x72h</option></select>
+    </label>
+    <label>Buscar nome:
+      <input id="fBusca" type="search" placeholder="Ex.: ALÉCIO, J BARBOSA, ...">
+    </label>
+    <a class="btn btn-acc" href="escala_pessoal_setembro_2025.csv" download>Baixar CSV</a>
+    <a class="btn" href="escala_setembro_2025.xlsx" download>Baixar Excel</a>
+  </div>
+  <div class="table-wrap">
+    <table id="escala">
+      <thead>
+        <tr><th>Setor</th><th>Grupo</th><th>Posto/Grad</th><th>Matrícula</th><th>Nome</th><th>Obs</th><th>Jornada</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>PELOPES</td><td>D</td><td>2ºSGT</td><td>113622</td><td>WILLAMES</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178542</td><td>BRAGA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178255</td><td>JORDÃ</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204709</td><td>ANA CAROLINE</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204661</td><td>CELSO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204929</td><td>PINHEIRO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>205033</td><td>ROMÁRIO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>3ºSGT</td><td>149475</td><td>FRANÇA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178384</td><td>LAYSA TELES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204528</td><td>LAYANE</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204938</td><td>LUÍS FELIPE</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204824</td><td>SWELDO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204784</td><td>GUTEMBERG</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>3ºSGT</td><td>149902</td><td>L. KUMMER</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>169957</td><td>ADELSON</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>186506</td><td>ISLEY</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>205150</td><td>ALÉCIO</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>186490</td><td>MONTES</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>205433</td><td>JUSTINO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>2ºSGT</td><td>113733</td><td>LESSA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>3ºSGT</td><td>149627</td><td>THAIS</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178097</td><td>LENNON</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178681</td><td>FEITOSA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178111</td><td>JACINTO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>2ºSGT</td><td>113908</td><td>GAMA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178582</td><td>DE CARVALHO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>186554</td><td>BARBOSA SILVA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>205034</td><td>ALEXANDRE</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>3ºSGT</td><td>142400</td><td>RUDNEY</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>186140</td><td>PINHEIRO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>186457</td><td>DE SANTANA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>204468</td><td>BRÁULIO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>169913</td><td>EMANOEL COSTA</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>169855</td><td>ROGER</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178429</td><td>WAGNER</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>SD</td><td>205250</td><td>JULIANA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>3ºSGT</td><td>167861</td><td>RUANDSON</td><td></td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178092</td><td>WILLY</td><td>**</td><td>24x72h</td></tr>
+<tr><td>PELOPES</td><td>D</td><td>CB</td><td>178824</td><td>BARBOSA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178497</td><td>ISRAEL</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205264</td><td>JULLY</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>206759</td><td>M.VINICIUS</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178806</td><td>J. PEDRO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204307</td><td>FERREIRA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186812</td><td>AGUIAR</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204794</td><td>L.SILVA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205512</td><td>INAJÁ</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205222</td><td>SILVA SANTOS</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>177977</td><td>NOGUEIRA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204818</td><td>TÁCITA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204293</td><td>M. BARBOSA</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140512</td><td>SANDES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169788</td><td>ANDERSON JOSÉ</td><td>*</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204406</td><td>MARIA LAYSA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>96472</td><td>MOURA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169921</td><td>J ALMEIDA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>185997</td><td>WILLAMS</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113286</td><td>DANIEL</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204966</td><td>DANIELA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178816</td><td>F. NUNES</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>96391</td><td>HERMES</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186814</td><td>MONIA RÚBIA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186799</td><td>DE ALMEIDA</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113362</td><td>WALLISTON</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204560</td><td>KARINA VILELA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113742</td><td>HELDER CES ÁR</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178748</td><td>LARISSA DUARTE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149531</td><td>EDNALDO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140358</td><td>PEREIRA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204174</td><td>V. LEMOS</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169858</td><td>DAVID</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113333</td><td>SOARES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113397</td><td>MARÍLIA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186787</td><td>CARMO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>165472</td><td>R. SOUZA</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>80790</td><td>JACUMBINHO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178399</td><td>DARCIELY</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113460</td><td>ALDEMIR</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>150179</td><td>JÉSSICA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186798</td><td>TÚLIO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140546</td><td>LINS</td><td>*</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186366</td><td>WÊNIA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186323</td><td>FERRO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113335</td><td>FIREMAN</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169927</td><td>J. BARBOSA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149355</td><td>DELFINO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140364</td><td>GENIVAL</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205451</td><td>FLÁVIA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>114296</td><td>LUCAS SILVA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186453</td><td>KÉSIA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186864</td><td>WESLEY FERRO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178660</td><td>ERISVALDO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149852</td><td>FRANCYNNE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178076</td><td>CAVALCANTE</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186545</td><td>MARQUES SANTOS</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140847</td><td>SIDRÔNIO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204911</td><td>HENRIQUE SOUZA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205023</td><td>EMERSON AMARAL</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149565</td><td>SANTOS</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178829</td><td>DIAS</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>165683</td><td>WESCLEY TAVARES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186756</td><td>EDUARDA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178072</td><td>DUARTE</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149654</td><td>J. SILVA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169938</td><td>MARCELA SILVA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186832</td><td>CLESIO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>150118</td><td>GOMES SANTOS</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178095</td><td>AGATHA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205333</td><td>ROZENDO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149320</td><td>GILBERTO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>165697</td><td>EVILLY</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178235</td><td>ARESTIDES</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178520</td><td>ALCANTARA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186824</td><td>ALBUQUERQUE</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>167850</td><td>ALAN</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>177876</td><td>LUANA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178303</td><td>HENRIQUE</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149318</td><td>RAFAELA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186564</td><td>CABRAL</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186833</td><td>FREIRE</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149530</td><td>FLÁVIO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178594</td><td>SANDRYELLE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178673</td><td>JABNEEL</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205391</td><td>LEMOS</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204999</td><td>LUIZ SANTOS</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>165680</td><td>NUNES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204016</td><td>YALLY</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186829</td><td>GALVÃO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>177785</td><td>LUCAS GOMES</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186162</td><td>CLAUDÔNIO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149670</td><td>MARIA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178702</td><td>MATHEU S</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205251</td><td>DAYSYELLE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186477</td><td>J.MENDES</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178121</td><td>FERRO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186838</td><td>NIEDJA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204943</td><td>S. FREIRE</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>169834</td><td>TIAGO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>188074</td><td>WILLIANE VICENTE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178006</td><td>CLEMENTE</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178269</td><td>JEFFERSON</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>188137</td><td>MICHAEL RODRIGO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>150266</td><td>DEIVID</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186025</td><td>CEZAR RODRIGUES</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186553</td><td>NADIEJE</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205498</td><td>DELGADO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178529</td><td>J LINO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186170</td><td>HOLANDA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204992</td><td>GALDINO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>177931</td><td>ANDRÉ SOUZA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>205193</td><td>SALOMÃO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>179192</td><td>DELFINO</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186201</td><td>V. SILVA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204617</td><td>AMANDA</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140385</td><td>CLAUDIO ANDRÉ</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186385</td><td>R. CARNEIRO</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>206820</td><td>MARCIO</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>CB</td><td>178590</td><td>FIGUEIREDO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>186106</td><td>EDMILSON</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>194952</td><td>RODRIGUES</td><td>(M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>2ºSGT</td><td>113238</td><td>SOUZA FILHO</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>140572</td><td>MENEZES</td><td>**</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>SD</td><td>204438</td><td>DEYVISSON</td><td>** (M)</td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>149353</td><td>J. ALVES</td><td></td><td>24x72h</td></tr>
+<tr><td>CANIL</td><td>D</td><td>3ºSGT</td><td>165671</td><td>SIQUEIRA</td><td>**</td><td>24x72h</td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140703</td><td>LINDIANE</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>149958</td><td>ELISSON</td><td>**</td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>2ºSGT</td><td>113675</td><td>MARLETE</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140401</td><td>GICELIO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>152651</td><td>ELIZABETH</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140521</td><td>FABIANA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140314</td><td>ELIVANIA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140266</td><td>APARECIDA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186460</td><td>AMABIA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>205559</td><td>ROBERTA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>178027</td><td>LIZANDRA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>188260</td><td>NISOTANEA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186761</td><td>KAIQUE</td><td>**</td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>205453</td><td>IOLANDA</td><td>**</td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186047</td><td>EDIV ÂNIA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>178813</td><td>VALERIANO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>178110</td><td>CESAR MENEZES</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186910</td><td>NETO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>167858</td><td>VICTOR HUGO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186126</td><td>NUNES</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>186454</td><td>HERCULES</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>149165</td><td>LESSA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>149718</td><td>ALMEIDA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>169851</td><td>CARNEIRO</td><td>**</td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>165668</td><td>S. SIMÔES</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>165695</td><td>FERREIRA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>149857</td><td>FERRO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>SD</td><td>187545</td><td>NADIR</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140625</td><td>ALVES</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>1ºSGT</td><td>80450</td><td>CARLOS</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>170528</td><td>FÁBIO OLIVEIRA</td><td>**</td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>149346</td><td>ERALDO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>178536</td><td>CLECIA PORTO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>2ºSGT</td><td>113732</td><td>MILENA</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>2ºSGT</td><td>114582</td><td>PINHEIRO</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>CB</td><td>178719</td><td>BRUNO QUEIROZ</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>2ºSGT</td><td>113860</td><td>CLAUDENICE</td><td></td><td></td></tr>
+<tr><td>COPOM</td><td>D</td><td>3ºSGT</td><td>140663</td><td>JARDEL</td><td>**</td><td></td></tr>
+<tr><td>VISTORIADOR DAS VIATURAS</td><td>D</td><td>3ºSGT</td><td>140783</td><td>MIKAEL</td><td>**</td><td></td></tr>
+<tr><td>VISTORIADOR DAS VIATURAS</td><td>D</td><td>CB</td><td>178093</td><td>DE LIMA</td><td></td><td></td></tr>
+<tr><td>VISTORIADOR DAS VIATURAS</td><td>D</td><td>3ºSGT</td><td>150188</td><td>HÉLIO</td><td>**</td><td></td></tr>
+<tr><td>ARMEIROS</td><td>D</td><td>2ºSGT</td><td>96422</td><td>FRANÇA</td><td></td><td></td></tr>
+<tr><td>ARMEIROS</td><td>D</td><td>CB</td><td>178229</td><td>GABRIEL</td><td>**</td><td></td></tr>
+<tr><td>ARMEIROS</td><td>D</td><td>3ºSGT</td><td>140328</td><td>SOUZA</td><td></td><td></td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>3ºSGT</td><td>152671</td><td>LUCAS</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>170501</td><td>L. RIBEIRO</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>178751</td><td>MANOEL</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>178089</td><td>MAX</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>204607</td><td>BANDEIRA</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>3ºSGT</td><td>150190</td><td>RODRIGO ALVES</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>177823</td><td>ELDA</td><td>**</td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>186911</td><td>DEYVID</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>186223</td><td>ABEL</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>205545</td><td>IVO</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>169928</td><td>ALMEIDA</td><td>**</td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>170466</td><td>GERALDO</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>CB</td><td>178236</td><td>LÁZARO</td><td>**</td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>205219</td><td>VALERIANO</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>SD</td><td>204679</td><td>LÍDIA CAVALARIÇO</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>3ºSGT</td><td>140897</td><td>MARQUES</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>C</td><td>3ºSGT</td><td>149470</td><td>ALISSON</td><td></td><td>12h</td></tr>
+<tr><td>POLICIAMENTO MONTADO</td><td>A</td><td>3ºSGT</td><td>165688</td><td>SUELLEN</td><td>*</td><td>12h</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td colspan="7"><small class="muted">Fonte: Escala oficial — Setembro/2025. Observações: * Redução de carga horária; ** Agentes de trânsito; (M) Militar.</small></td></tr>
+      </tfoot>
+    </table>
+  </div>
+  <p><small class="muted">Planilha de referência de grupos por data disponível em <a class="btn" href="escala_grupos_setembro_2025.csv" download>CSV Grupos/Data</a>.</small></p>
+</div>
+<script>
+const fGrupo = document.getElementById('fGrupo');
+const fSetor = document.getElementById('fSetor');
+const fJornada = document.getElementById('fJornada');
+const fBusca = document.getElementById('fBusca');
+const rows = Array.from(document.querySelectorAll('#escala tbody tr'));
+
+function matchCell(td, val){ return td.textContent.toUpperCase().includes(val.toUpperCase()); }
+
+function applyFilters(){
+  const g = fGrupo.value;
+  const s = fSetor.value;
+  const j = fJornada.value;
+  const q = fBusca.value.trim().toUpperCase();
+  rows.forEach(tr => {
+    const tds = tr.children;
+    const okG = !g || tds[1].textContent === g;
+    const okS = !s || tds[0].textContent === s;
+    const okJ = !j || tds[6].textContent === j;
+    const okQ = !q || matchCell(tds[4], q) || matchCell(tds[0], q) || matchCell(tds[2], q);
+    const show = okG && okS && okJ && okQ;
+    tr.style.display = show ? '' : 'none';
+  });
+}
+[fGrupo,fSetor,fJornada,fBusca].forEach(el => el.addEventListener('input', applyFilters));
+applyFilters();
+</script>
+</body>
+</html>
