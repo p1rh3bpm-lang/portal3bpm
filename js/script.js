@@ -548,6 +548,7 @@ switchTab = function(tab) {
 
   // ---------- Escala: ações rápidas ----------
 function initEscalaControls(){
+  const tabBtn = document.getElementById("tab-escala");
   const painel = document.getElementById("painel-escala");
   const iframe = document.getElementById("escalaPdfFrame");
   const wrapTable = document.getElementById("escalaTableWrap");
