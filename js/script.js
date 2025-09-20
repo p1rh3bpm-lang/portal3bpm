@@ -178,6 +178,67 @@ const ROTINA_GRID = {
   ]
 };
 
+// =================== DADOS/RENDER: ESCALA MENSAL ===================
+// Fonte: arquivo estático em assets/escala_mensal_portal.json (gerado da planilha)
+let ESCALA_MENSAL = [];
+
+async function carregarEscalaMensal() {
+  try {
+    const resp = await fetch("assets/escala_mensal_portal.json", { cache: "no-store" });
+    ESCALA_MENSAL = await resp.json();
+    renderEscalaMensal();
+  } catch (err) {
+    console.error("Falha ao carregar escala:", err);
+    const empty = document.querySelector("#empty-escala");
+    if (empty) empty.hidden = false;
+  }
+}
+
+function renderEscalaMensal() {
+  const wrap = document.querySelector("#escala-mensal");
+  if (!wrap) return;
+
+  if (!ESCALA_MENSAL || !ESCALA_MENSAL.length) {
+    const empty = document.querySelector("#empty-escala");
+    if (empty) empty.hidden = false;
+    wrap.innerHTML = "";
+    return;
+  }
+
+  // opcional: ordenar por data/turno/guarnição
+  const rows = [...ESCALA_MENSAL];
+
+  wrap.innerHTML = `
+    <table class="rotina">
+      <thead>
+        <tr>
+          <th style="width:120px">Data</th>
+          <th>Guarnição</th>
+          <th>Comandante</th>
+          <th>Turno</th>
+          <th>Função</th>
+          <th>P/G</th>
+          <th>Nome</th>
+          <th>Local</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(r => `
+          <tr>
+            <td><b>${r.data ?? r["MÊS REFERENCIA"] ?? ""}</b></td>
+            <td>${r.guarnicao ?? ""}</td>
+            <td>${r.comandante ?? ""}</td>
+            <td>${r.turno ?? ""}</td>
+            <td>${r["FUNÇÃO"] ?? ""}</td>
+            <td>${r["P/G"] ?? ""}</td>
+            <td>${r["NOME DE GUERA"] ?? r["NOME DE GUERRA"] ?? ""}</td>
+            <td>${r["LOCAL"] ?? ""}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
 
 
 // =================== UTILIDADES (Helpers) ===================
@@ -285,25 +346,33 @@ function renderGrid(){
 
 
 // =================== NAVEGAÇÃO DE ABAS ===================
-// Responsável por: alternar entre "Operações" e "Gestor" e disparar renders.
+// Responsável por: alternar entre "Operações", "Gestor" e "Escala" e disparar renders.
 function switchTab(tab){
   state.tab = tab;
   state.tag = "Todos";
 
   $("#tab-op")?.setAttribute("aria-selected", tab==="op");
   $("#tab-gestor")?.setAttribute("aria-selected", tab==="gestor");
+  $("#tab-escala")?.setAttribute("aria-selected", tab==="escala");
 
   $("#painel-op").hidden = tab!=="op";
   $("#painel-gestor").hidden = tab!=="gestor";
+  $("#painel-escala").hidden = tab!=="escala";
 
   if (tab === "op" || tab === "gestor") {
     renderTags();
     renderGrid();
   }
 
-  // >>> renderiza a Rotina somente quando o painel do Gestor estiver ativo
+  // Rotina e Distribuição só quando o Gestor estiver ativo
   if (tab === "gestor") {
-    renderRotinaIntoGestor();
+    renderRotinaIntoGestor?.();
+  }
+
+  // Carrega e renderiza a Escala quando a aba "escala" é ativada
+  if (tab === "escala") {
+    // se já tiver carregado uma vez e quiser evitar recarregar, você pode checar ESCALA_MENSAL.length
+    carregarEscalaMensal();
   }
 }
 
@@ -494,6 +563,8 @@ function renderDistribuicaoRP() {
   // Abas
   $("#tab-op").addEventListener("click", ()=> switchTab("op"));
   $("#tab-gestor").addEventListener("click", ()=> ensureGestor());
+  $("#tab-escala").addEventListener("click", ()=> switchTab("escala"));
+
 
   // Filtros comuns (Operações/Gestor)
   $("#q").addEventListener("input", e=>{ state.q = e.target.value; renderGrid(); });
