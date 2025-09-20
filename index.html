@@ -58,37 +58,8 @@
     <section id="painel-gestor" role="tabpanel" aria-labelledby="tab-gestor" hidden>
       <div class="muted" style="margin-bottom:8px">Área restrita. Para sigilo real, use proteção de servidor (Netlify password/Identity). Este PIN é apenas controle local do navegador.</div>
       <div id="grid-gestor" class="grid" role="list"></div>
-    </section>
 
-<section id="painel-escala" role="tabpanel" aria-labelledby="tab-escala" hidden>
-  <h2 style="margin:0 0 6px 0;font-size:18px;">Escala Mensal – 3º BPM</h2>
-  <div class="muted" style="margin-bottom:8px">Visualização da escala completa por dia e por guarnição.</div>
-
-  <!-- Toolbar de filtros (somente da Escala) -->
-  <div class="toolbar" id="escala-toolbar">
-    <label class="muted">Guarnição:</label>
-    <select id="escalaSelGuarnicao" class="input" style="max-width:220px">
-      <option value="Todos">Todos</option>
-    </select>
-
-    <label class="muted">Turno:</label>
-    <select id="escalaSelTurno" class="input" style="max-width:160px">
-      <option value="Todos">Todos</option>
-    </select>
-
-    <button id="escalaBtnLimpar" class="btn">Limpar</button>
-  </div>
-
-  <!-- Tabela da Escala -->
-  <div class="table-wrap" id="escala-mensal"></div>
-
-  <!-- Estado vazio -->
-  <div id="empty-escala" class="empty" hidden>Nenhuma escala encontrada.</div>
-</section>
-
-
-
-      <!-- Distribuição de RP por Turno -->
+            <!-- Distribuição de RP por Turno -->
       <hr style="border:0;border-top:1px dashed var(--ring);margin:18px 0;">
       <h2 style="margin:0 0 6px 0;font-size:18px;">Distribuição de RP por Turno</h2>
       <div class="muted" style="margin-bottom:8px">Consulta por turno e por cidade.</div>
@@ -131,6 +102,34 @@
 
       <div id="empty-gestor" class="empty" hidden>Nenhum item encontrado. Ajuste filtros ou busca.</div>
     </section>
+
+<section id="painel-escala" role="tabpanel" aria-labelledby="tab-escala" hidden>
+  <h2 style="margin:0 0 6px 0;font-size:18px;">Escala Mensal – 3º BPM</h2>
+  <div class="muted" style="margin-bottom:8px">Visualização da escala completa por dia e por guarnição.</div>
+
+  <!-- Toolbar de filtros (somente da Escala) -->
+  <div class="toolbar" id="escala-toolbar">
+    <label class="muted">Guarnição:</label>
+    <select id="escalaSelGuarnicao" class="input" style="max-width:220px">
+      <option value="Todos">Todos</option>
+    </select>
+
+    <label class="muted">Turno:</label>
+    <select id="escalaSelTurno" class="input" style="max-width:160px">
+      <option value="Todos">Todos</option>
+    </select>
+
+    <button id="escalaBtnLimpar" class="btn">Limpar</button>
+  </div>
+
+  <!-- Tabela da Escala -->
+  <div class="table-wrap" id="escala-mensal"></div>
+
+  <!-- Estado vazio -->
+  <div id="empty-escala" class="empty" hidden>Nenhuma escala encontrada.</div>
+</section>
+
+
 
     <!-- Rodapé -->
     <footer class="footer" id="siteFoot">
