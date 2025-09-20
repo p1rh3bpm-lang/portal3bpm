@@ -182,10 +182,22 @@ const ROTINA_GRID = {
 // Fonte: arquivo estático em assets/escala_mensal_portal.json (gerado da planilha)
 let ESCALA_MENSAL = [];
 
+// 🔹 (A) Estado dos filtros e helpers
+const escalaFiltro = { guarnicao: "Todos", turno: "Todos" };
+function normalizaStr(v){ return (v ?? "").toString().trim(); }
+function turnoKey(v){ return normalizaStr(v).toUpperCase(); }
+function uniqueSorted(list, key){
+  const s = new Set();
+  list.forEach(r => { const k = key(r); if (k) s.add(k); });
+  return Array.from(s).sort((a,b)=> a.localeCompare(b));
+}
+
 async function carregarEscalaMensal() {
   try {
     const resp = await fetch("assets/escala_mensal_portal.json", { cache: "no-store" });
     ESCALA_MENSAL = await resp.json();
+
+    preencherFiltrosEscala();   // 🔹 (B) preencher selects após carregar
     renderEscalaMensal();
   } catch (err) {
     console.error("Falha ao carregar escala:", err);
@@ -194,6 +206,46 @@ async function carregarEscalaMensal() {
   }
 }
 
+// 🔹 (C) Função para preencher os <select> e listeners
+function preencherFiltrosEscala(){
+  const selG = document.getElementById("escalaSelGuarnicao");
+  const selT = document.getElementById("escalaSelTurno");
+  const btnL = document.getElementById("escalaBtnLimpar");
+  if (!selG || !selT) return;
+
+  const guarns = uniqueSorted(ESCALA_MENSAL, r => normalizaStr(r.guarnicao).toUpperCase());
+  const turnos = uniqueSorted(ESCALA_MENSAL, r => turnoKey(r.turno));
+
+  selG.innerHTML = `<option value="Todos">Todos</option>` + guarns.map(g=>`<option value="${g}">${g}</option>`).join("");
+  selT.innerHTML = `<option value="Todos">Todos</option>` + turnos.map(t=>`<option value="${t}">${t}</option>`).join("");
+
+  if (!selG._wired){
+    selG.addEventListener("change", e => {
+      escalaFiltro.guarnicao = e.target.value || "Todos";
+      renderEscalaMensal();
+    });
+    selG._wired = true;
+  }
+  if (!selT._wired){
+    selT.addEventListener("change", e => {
+      escalaFiltro.turno = e.target.value || "Todos";
+      renderEscalaMensal();
+    });
+    selT._wired = true;
+  }
+  if (btnL && !btnL._wired){
+    btnL.addEventListener("click", () => {
+      escalaFiltro.guarnicao = "Todos";
+      escalaFiltro.turno = "Todos";
+      selG.value = "Todos";
+      selT.value = "Todos";
+      renderEscalaMensal();
+    });
+    btnL._wired = true;
+  }
+}
+
+// 🔹 (D) Render com filtros + classe por turno (para cores via CSS)
 function renderEscalaMensal() {
   const wrap = document.querySelector("#escala-mensal");
   if (!wrap) return;
@@ -205,8 +257,13 @@ function renderEscalaMensal() {
     return;
   }
 
-  // opcional: ordenar por data/turno/guarnição
-  const rows = [...ESCALA_MENSAL];
+  const rows = ESCALA_MENSAL.filter(r => {
+    const g = normalizaStr(r.guarnicao).toUpperCase();
+    const t = turnoKey(r.turno);
+    const okG = (escalaFiltro.guarnicao === "Todos") || (g === escalaFiltro.guarnicao);
+    const okT = (escalaFiltro.turno    === "Todos") || (t === escalaFiltro.turno);
+    return okG && okT;
+  });
 
   wrap.innerHTML = `
     <table class="rotina">
@@ -223,18 +280,24 @@ function renderEscalaMensal() {
         </tr>
       </thead>
       <tbody>
-        ${rows.map(r => `
-          <tr>
-            <td><b>${r.data ?? r["MÊS REFERENCIA"] ?? ""}</b></td>
-            <td>${r.guarnicao ?? ""}</td>
-            <td>${r.comandante ?? ""}</td>
-            <td>${r.turno ?? ""}</td>
-            <td>${r["FUNÇÃO"] ?? ""}</td>
-            <td>${r["P/G"] ?? ""}</td>
-            <td>${r["NOME DE GUERA"] ?? r["NOME DE GUERRA"] ?? ""}</td>
-            <td>${r["LOCAL"] ?? ""}</td>
-          </tr>
-        `).join("")}
+        ${rows.map(r => {
+          const turno = turnoKey(r.turno);
+          const classeTurno = turno ? `turno-${turno}` : "";
+          const dataStr = r.data ?? r["MÊS REFERENCIA"] ?? "";
+          const nomeStr = r["NOME DE GUERA"] ?? r["NOME DE GUERRA"] ?? "";
+          return `
+            <tr class="${classeTurno}">
+              <td><b>${dataStr}</b></td>
+              <td>${r.guarnicao ?? ""}</td>
+              <td>${r.comandante ?? ""}</td>
+              <td class="col-turno">${turno || ""}</td>
+              <td>${r["FUNÇÃO"] ?? ""}</td>
+              <td>${r["P/G"] ?? ""}</td>
+              <td>${nomeStr}</td>
+              <td>${r["LOCAL"] ?? ""}</td>
+            </tr>
+          `;
+        }).join("")}
       </tbody>
     </table>
   `;
@@ -434,7 +497,7 @@ function isNowBetween(hhmm) {
 
 function badgeFor(text) {
   // Detecta “OPO XX – NOME” e devolve span com badge
-  const m = text.match(/OPO\\s*\\d+\\s*–\\s*([A-ZÁÉÍÓÚÃÕÇ]+|ÓRION)/i);
+  const m = text.match(/OPO\s*\d+\s*–\s*([A-ZÁÉÍÓÚÃÕÇ]+|ÓRION)/i);
   if (!m) return text;
   const nome = m[1].toUpperCase().replace("Ó", "Ó").replace("ORION","ÓRION");
   return text.replace(m[0], `<span class="badge-opo badge-${nome}">${m[0]}</span>`);
@@ -580,40 +643,40 @@ function renderDistribuicaoRP() {
   // ======= Monkey-patch para inserir Rotina & Distribuição no momento certo =======
   // Guardamos a referência da switchTab original e acrescentamos chamadas extras
   // quando a aba "gestor" é ativada, além de ligar listeners dos filtros RP.
- const _oldSwitchTab = switchTab;
-switchTab = function(tab) {
-  _oldSwitchTab(tab);
+  const _oldSwitchTab = switchTab;
+  switchTab = function(tab) {
+    _oldSwitchTab(tab);
 
-  if (tab === "gestor") {
-    // 1) Distribuição primeiro
-    if (typeof renderDistribuicaoRP === "function") renderDistribuicaoRP();
+    if (tab === "gestor") {
+      // 1) Distribuição primeiro
+      if (typeof renderDistribuicaoRP === "function") renderDistribuicaoRP();
 
-    // 2) Rotina depois
-    if (typeof renderRotinaIntoGestor === "function") renderRotinaIntoGestor();
+      // 2) Rotina depois
+      if (typeof renderRotinaIntoGestor === "function") renderRotinaIntoGestor();
 
-    // Liga listeners de turno/cidade/limpar (apenas uma vez)
-    const turnoSel = document.querySelector("#turnoSel");
-    const buscaCidade = document.querySelector("#buscaCidade");
-    const btnLimpar = document.querySelector("#btnLimparFiltro");
+      // Liga listeners de turno/cidade/limpar (apenas uma vez)
+      const turnoSel = document.querySelector("#turnoSel");
+      const buscaCidade = document.querySelector("#buscaCidade");
+      const btnLimpar = document.querySelector("#btnLimparFiltro");
 
-    if (turnoSel && !turnoSel._wired) {
-      turnoSel.addEventListener("change", renderDistribuicaoRP);
-      turnoSel._wired = true;
+      if (turnoSel && !turnoSel._wired) {
+        turnoSel.addEventListener("change", renderDistribuicaoRP);
+        turnoSel._wired = true;
+      }
+      if (buscaCidade && !buscaCidade._wired) {
+        buscaCidade.addEventListener("input", renderDistribuicaoRP);
+        buscaCidade._wired = true;
+      }
+      if (btnLimpar && !btnLimpar._wired) {
+        btnLimpar.addEventListener("click", () => {
+          if (turnoSel) turnoSel.value = "ALFA";
+          if (buscaCidade) buscaCidade.value = "";
+          renderDistribuicaoRP();
+        });
+        btnLimpar._wired = true;
+      }
     }
-    if (buscaCidade && !buscaCidade._wired) {
-      buscaCidade.addEventListener("input", renderDistribuicaoRP);
-      buscaCidade._wired = true;
-    }
-    if (btnLimpar && !btnLimpar._wired) {
-      btnLimpar.addEventListener("click", () => {
-        if (turnoSel) turnoSel.value = "ALFA";
-        if (buscaCidade) buscaCidade.value = "";
-        renderDistribuicaoRP();
-      });
-      btnLimpar._wired = true;
-    }
-  }
-};
+  };
   // ======= FIM do patch =======
 
   // Navegação direta via hash (#gestor) respeitando PIN
