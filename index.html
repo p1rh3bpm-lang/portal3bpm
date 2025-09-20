@@ -28,6 +28,7 @@
     <nav class="tabs" role="tablist" aria-label="Seções">
       <button class="tab" id="tab-op" role="tab" aria-selected="true" aria-controls="painel-op">Operações Vigentes</button>
       <button class="tab" id="tab-gestor" role="tab" aria-selected="false" aria-controls="painel-gestor">Gestor (Restrito)</button>
+      <button class="tab" id="tab-escala" role="tab" aria-selected="false" aria-controls="painel-escala">Escala Mensal</button>
     </nav>
 
     <!-- Barra de busca + seletor de status -->
@@ -57,6 +58,14 @@
     <section id="painel-gestor" role="tabpanel" aria-labelledby="tab-gestor" hidden>
       <div class="muted" style="margin-bottom:8px">Área restrita. Para sigilo real, use proteção de servidor (Netlify password/Identity). Este PIN é apenas controle local do navegador.</div>
       <div id="grid-gestor" class="grid" role="list"></div>
+
+    <section id="painel-escala" role="tabpanel" aria-labelledby="tab-escala" hidden>
+      <h2 style="margin:0 0 6px 0;font-size:18px;">Escala Mensal – 3º BPM</h2>
+      <div class="muted" style="margin-bottom:8px">Visualização da escala completa por dia e por guarnição.</div>
+      <div class="table-wrap" id="escala-mensal"></div>
+      <div id="empty-escala" class="empty" hidden>Nenhuma escala encontrada.</div>
+    </section>
+
 
       <!-- Distribuição de RP por Turno -->
       <hr style="border:0;border-top:1px dashed var(--ring);margin:18px 0;">
