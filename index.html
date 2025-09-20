@@ -60,12 +60,30 @@
       <div id="grid-gestor" class="grid" role="list"></div>
     </section>
 
-    <section id="painel-escala" role="tabpanel" aria-labelledby="tab-escala" hidden>
-      <h2 style="margin:0 0 6px 0;font-size:18px;">Escala Mensal – 3º BPM</h2>
-      <div class="muted" style="margin-bottom:8px">Visualização da escala completa por dia e por guarnição.</div>
-      <div class="table-wrap" id="escala-mensal"></div>
-      <div id="empty-escala" class="empty" hidden>Nenhuma escala encontrada.</div>
-    </section>
+<section id="painel-escala" role="tabpanel" aria-labelledby="tab-escala" hidden>
+  <h2 style="margin:0 0 6px 0;font-size:18px;">Escala Mensal – 3º BPM</h2>
+  <div class="muted" style="margin-bottom:8px">Visualização da escala completa por dia e por guarnição.</div>
+
+  <!-- 🔹 Toolbar de filtros -->
+  <div class="toolbar" id="escala-toolbar">
+    <label class="muted">Guarnição:</label>
+    <select id="escalaSelGuarnicao" class="input" style="max-width:220px">
+      <option value="Todos">Todos</option>
+      <!-- opções serão preenchidas via JS -->
+    </select>
+
+    <label class="muted">Turno:</label>
+    <select id="escalaSelTurno" class="input" style="max-width:160px">
+      <option value="Todos">Todos</option>
+      <!-- opções serão preenchidas via JS -->
+    </select>
+
+    <button id="escalaBtnLimpar" class="btn">Limpar</button>
+  </div>
+
+  <div class="table-wrap" id="escala-mensal"></div>
+  <div id="empty-escala" class="empty" hidden>Nenhuma escala encontrada.</div>
+</section>
 
 
       <!-- Distribuição de RP por Turno -->
